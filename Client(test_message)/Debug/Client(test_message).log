@@ -1,0 +1,16 @@
+﻿  Client(test_message).cpp
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(125): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(154): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(178): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(210): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(228): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(254): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(280): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(307): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(334): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(357): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(378): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(396): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(416): warning C4018: '<': signed/unsigned mismatch
+  Client(test_message).vcxproj -> C:\Manh\LTM\EventManagerServer(test)\Debug\Client(test_message).exe
+  Client(test_message).vcxproj -> C:\Manh\LTM\EventManagerServer(test)\Debug\Client(test_message).pdb (Full PDB)

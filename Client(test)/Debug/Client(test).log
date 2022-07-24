@@ -1,0 +1,10 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Client(test).vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  stdafx.cpp
+  Client(test).cpp
+c:\manh\ltm\eventmanagerserver(test)\client(test)\client(test).cpp(119): warning C4101: 'buff': unreferenced local variable
+c:\manh\ltm\eventmanagerserver(test)\client(test)\client(test).cpp(173): warning C4101: 'buff': unreferenced local variable
+c:\manh\ltm\eventmanagerserver(test)\client(test)\client(test).cpp(246): warning C4715: 'thread1': not all control paths return a value
+c:\manh\ltm\eventmanagerserver(test)\client(test)\client(test).cpp(292): warning C4715: 'thread2': not all control paths return a value
+c:\manh\ltm\eventmanagerserver(test)\client(test)\client(test).cpp(213): warning C4715: 'thread': not all control paths return a value
+  Client(test).vcxproj -> C:\Manh\LTM\EventManagerServer(test)\Debug\Client(test_thread).exe
+  Client(test).vcxproj -> C:\Manh\LTM\EventManagerServer(test)\Debug\Client(test_thread).pdb (Full PDB)

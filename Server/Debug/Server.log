@@ -1,0 +1,5 @@
+﻿  UserController.cpp
+c:\manh\ltm\eventmanagerserver(test)\server\usercontroller.cpp(111): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\server\usercontroller.cpp(162): warning C4018: '<': signed/unsigned mismatch
+  Server.vcxproj -> C:\Manh\LTM\EventManagerServer(test)\Debug\Server.exe
+  Server.vcxproj -> C:\Manh\LTM\EventManagerServer(test)\Debug\Server.pdb (Full PDB)
