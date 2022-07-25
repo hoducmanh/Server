@@ -1,10 +1,4 @@
 // Server.cpp : Defines the entry point for the console application.
-//TODO:
-//add delete reqest in requestReplyHandling
-//add eventUser(users that participate in particular event)
-//fix inviteHandling
-//fix inviteReplyHandling
-//fix refreshInvite
 #include <iostream>
 #include <stdio.h>
 #include <conio.h>
@@ -124,7 +118,6 @@ void messageHandling(socketInfo &client, socketInfo* sock, DWORD &index, DWORD &
 			client.userName = tmpStr.substr(0, pos);
 			string code = loginHandling(tmpStr);
 			sendMessage(client.clientSock, code);
-			//passed
 		}
 		else if (header == "BYE")
 		{
@@ -132,13 +125,11 @@ void messageHandling(socketInfo &client, socketInfo* sock, DWORD &index, DWORD &
 			client.userName = "";
 			string code = "120";
 			sendMessage(client.clientSock, code);
-			//passed
 		}
 		else if (header == "CREATEEVENT")
 		{
 			string code = createEvent(tmpStr, eventNameMap1, countEvent, nameAndPass1);;
 			sendMessage(client.clientSock, code);
-			//passed
 		}
 		else if (header == "INVITE")
 		{
@@ -155,13 +146,11 @@ void messageHandling(socketInfo &client, socketInfo* sock, DWORD &index, DWORD &
 		{
 			string code = requestHandling(tmpStr);
 			sendMessage(client.clientSock, code);
-			//passed
 		}
 		else if (header == "REQUESTREPLY")
 		{
 			string code = requestReplyHandling(tmpStr);
 			sendMessage(client.clientSock, code);
-			//passed
 		}
 		else if (header == "REFRESHINVITE")
 		{
@@ -172,17 +161,26 @@ void messageHandling(socketInfo &client, socketInfo* sock, DWORD &index, DWORD &
 		{
 			string listOfRequest = listRequest(tmpStr);
 			sendMessage(client.clientSock, listOfRequest);
-			//passed
 		}
 		else if (header == "LISTUSER")
 		{
 			string listOfUser = listUser();
 			sendMessage(client.clientSock, listOfUser);
-			//passed
 		}
 		else if (header == "LISTEVENT")
 		{
-			getEventList();
+			string listOfEvent = getEventList();
+			sendMessage(client.clientSock, listOfEvent);
+		}
+		else if (header == "REFRESHREQUESTREPLY")
+		{
+			string listOfRequestReply = getRequestReply(tmpStr);
+			sendMessage(client.clientSock, listOfRequestReply);
+		}
+		else if (header == "REFRESHINVITEREPLY")
+		{
+			string listOfInvitationReply = getInvitationReply(tmpStr);
+			sendMessage(client.clientSock, listOfInvitationReply);
 		}
 		else {
 			sendMessage(client.clientSock, "99");

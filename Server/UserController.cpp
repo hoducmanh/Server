@@ -13,7 +13,6 @@ using namespace std;
  
 map<string, string> account;
 
-
 int checkUserName(string username) {
 	int cnt = 0;//counting times 
 	string tmpStr;
@@ -63,18 +62,7 @@ string listUser() {
 	new_file.close();
 	return listOfUser;
 }
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-/**
-*@function isDumplicateAccount: check if user register with the username that was registerd before .
-*
-@param newAccount: username that is registerd
-*
-*@return:
-*true: if user register with the username that was registerd before
-*false: if user register with the username that was NOT registerd before
-**/
+
 bool isDumplicateAccount(string newAccount) {
 	string filename("Account.txt");
 	string line;
@@ -92,16 +80,7 @@ bool isDumplicateAccount(string newAccount) {
 	input_file.close();
 	return false;
 }
-/**
-*@function createAccount: Register for user.
-*
-@param s: a string contain user infor: name and pass
-*
-*@return:
-*99: if request is SYSTAX ERROR
-*13: dumplicate username
-*12: register successfu
-**/
+
 string createAccount(string s) {
 	int beginindex = 0; int cnt = 0;
 	ofstream outfile;
@@ -145,16 +124,7 @@ string createAccount(string s) {
 	}
 	outfile.close();
 }
-/**
-*@function loginHandling: Login for user.
-*
-@param s: a string contain user infor: name and pass
-*
-*@return:
-*99: if request is SYSTAX ERROR
-*21: login fail
-*20: login successful
-**/
+
 string loginHandling(string s) {
 	int beginindex = 1, cnt = 0;
 	string name = "";

@@ -11,6 +11,6 @@ c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).c
 c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(357): warning C4018: '<': signed/unsigned mismatch
 c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(378): warning C4018: '<': signed/unsigned mismatch
 c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(396): warning C4018: '<': signed/unsigned mismatch
-c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(416): warning C4018: '<': signed/unsigned mismatch
+c:\manh\ltm\eventmanagerserver(test)\client(test_message)\client(test_message).cpp(417): warning C4018: '<': signed/unsigned mismatch
   Client(test_message).vcxproj -> C:\Manh\LTM\EventManagerServer(test)\Debug\Client(test_message).exe
   Client(test_message).vcxproj -> C:\Manh\LTM\EventManagerServer(test)\Debug\Client(test_message).pdb (Full PDB)

@@ -404,9 +404,10 @@ int main(int argc, char* argv[]) {
 				string messageToServer;
 				string messageToClient;
 
+				messageToServer = "LISTEVENT ";
 				if (messageToServer == "") break;
-				messageToServer = "LISTUSER ";
 				sendMessage(client, messageToServer);
+
 				while (1) {
 					int retToClient = recv(client, buff, BUFF_SIZE, 0);
 					messageToClient.append(buff);

@@ -266,19 +266,6 @@ string listRequest(string requester) {
 	return listOfRequest;
 }
 
-
-/////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-/**
-*@function getLine: get position of the invitation that was stored in Invitation.txt file.
-*
-*@param s: the invitation that need to find position
-*
-*@return:
-*0 if the invitation not exist
-*pos: if position of the invitation is pos
-**/
 int getLine(string s) {
 	string filename("Invitation.txt");
 	string line, eventId = "";
@@ -298,19 +285,6 @@ int getLine(string s) {
 	return 0;
 	input_file.close();
 }
-
-/**
-*@function createEvent: Create an event. Store event's id, name, time, place, description in Event.txt; eventId and creator is stored in EventId.txt
-*
-@param s: a string contain event information : creator, event's name, time, place, description
-@param eventNameMap: a map contain eventId and username(creator) - eventId is key, username is value. An element is added when create event successfully
-@param countEvent: eventId that is create automatically
-@param nameAndPass: a map contain username and password of user had register. username is key, pass is value. If username not exist, password is empty
-*
-*@return:
-*99 if request is SYSTAX ERROR, username(creator) is not exist, eventInfor is empty
-*30 if Create event successfully
-**/
 
 string createEvent(string s, map<string, string>&eventNameMap, int& countEvent, map<string, string>&nameAndPass) {
 	//EVENTCREATE creator|eventName|eventPlace|eventTime | eventDescription | \r\n
@@ -391,7 +365,7 @@ string createEvent(string s, map<string, string>&eventNameMap, int& countEvent, 
 		return "99";
 	}
 	else {
-		outfileEvent << eventId << '|' << eventName << '|' << eventPlace << '|' << eventTime << '|' << eventDesc << '|' << endl;
+		outfileEvent << eventId << '|' << eventCreator << '|' << eventName << '|' << eventPlace << '|' << eventTime << '|' << eventDesc << '|' << endl;
 		outfileEventName << eventId << '|' << eventCreator << endl;
 		cout << "Create event successfully" << endl;
 		eventNameMap[eventId] = eventCreator;
@@ -401,17 +375,25 @@ string createEvent(string s, map<string, string>&eventNameMap, int& countEvent, 
 	outfileEvent.close();
 	outfileEventName.close();
 }
-/**
-*@function inviteHandling: Create an invitation.
-*
-@param s: a string contain invitation information : inviter (creator - user that create the event), reveiver, eventId
-@param eventNameMap: a map contain eventId and username(creator) - eventId is key. Used to check if the event was created by inviter
-@param nameAndPass: a map contain username and password of user had register. username is key, pass is value. If username not exist, password is empty
-*
-*@return:
-*99 if request is SYSTAX ERROR, creator or reviver is not exist, the event not was created by inviter
-*40 if Create invitation successfully
-**/
+
+bool duplicateInvitation(string invitation) {
+	string filename("Invitation.txt");
+	string line;
+	ifstream input_file(filename);
+	if (!input_file.is_open()) {
+		cerr << "Could not open the file - '"
+			<< filename << "'" << endl;
+		return "99";
+	}
+	while (getline(input_file, line)) {
+		if (line == invitation) {
+			return true;
+		}
+	}
+	input_file.close();
+	return false;
+}
+
 string inviteHandling(string s, map<string, string>&nameAndPass, map<string, string>&eventNameMap) {
 	//INVITE Sender|Receiver|eventId|\r\n
 	cout << s << endl;
@@ -453,25 +435,17 @@ string inviteHandling(string s, map<string, string>&nameAndPass, map<string, str
 		return "99";
 	}
 	else {
+		string invitation = eventCreator + "|" + receiver + "|" + eventId;
+		if (duplicateInvitation(invitation)) {
+			return "99";
+		}
 		outfile << eventCreator << '|' << receiver << '|' << eventId << endl;
 		cout << "Send invitation successfully" << endl;
 		return "40";
 	}
 	outfile.close();
 }
-/**
-*@function inviteReplyHandling: Accept or deny invitation. Once the invitation is responsed, it is deleted in file Invitaion.txt.
-The response is written in file InvitationReply.txt
-*
-@param s: a string contain reply information : inviter (creator - user that create the event), reveiver, eventId, OK-accept/DENY-deny
-@param eventNameMap: a map contain eventId and username(creator) - eventId is key. Used to check if the event was created by inviter
-@param nameAndPass: a map contain username and password of user had register. username is key, pass is value. If username not exist, password is empty
-*
-*@return:
-*99 if request is SYSTAX ERROR, creator or reviver is not exist, the event not was created by inviter
-*50 if response successfully
-*51 if the invitation is not in file Invitation.txt
-**/
+
 string inviteReplyHandling(string s, map<string, string>&nameAndPass, map<string, string>&eventNameMap) {
 	//INVITEREPLY Sender|Receiver|eventId|OK/DENY|
 	ofstream outfile;
@@ -528,14 +502,7 @@ string inviteReplyHandling(string s, map<string, string>&nameAndPass, map<string
 	}
 	outfile.close();
 }
-/**
-*@function getInvitationList: get all invitation that was sent to user.
-*
-@param userName: a string contain username who want to see he/she 's Invitation List
-*
-*@return:
-*invitationList List of invitation. Each Invitaion is concat to each other by '#'
-**/
+
 string getInvitationList(string userName) {
 	string invitationList = "";
 	string filename("Invitation.txt");
@@ -568,14 +535,7 @@ string getInvitationList(string userName) {
 	return invitationList;
 	input_file.close();
 }
-/**
-*@function getEventList: get all event.
-*
-@param: no param
-*
-*@return:
-*eventList: List of Event. Each Event is concat to each other by '#'
-**/
+
 string getEventList() {
 	string eventList = "";
 	string filename("Event.txt");
@@ -593,14 +553,7 @@ string getEventList() {
 	return eventList;
 	input_file.close();
 }
-/**
-*@function getUserAttendList: get all user attend the Event.
-*
-@param id: a string contain event's id
-*
-*@return:
-*userList List of invitation. Each Invitaion is concat to each other by '#'
-**/
+
 string getUserAttendList(string id) {
 	string userList = "";
 	string filename("InvitationReply.txt");
@@ -642,14 +595,77 @@ string getUserAttendList(string id) {
 	input_file_req.close();
 	return userList;
 }
-/**
-*@function getEventInforById: get Event infor corresponding with eventId.
-*
-@param n: event id in Number
-*
-*@return:
-*eventInfor: event Information
-**/
+
+string getInvitationReply(string userName) {
+	string invitationReplyList = "";
+	string filename("InvitationReply.txt");
+	string line; int countReply = 0;
+	int first = 0, second = 0, cnt = 0, lineNum = 0;
+	ifstream input_file(filename);
+	if (!input_file.is_open()) {
+		cerr << "Could not open the file - '"
+			<< filename << "'" << endl;
+		return "Server can not access to DB. Try Again!";
+	}
+	while (getline(input_file, line)) {
+		countReply++;
+		for (int i = 0; i < line.length(); i++) {
+			if (line[i] == '|') {
+				cnt++;
+				if (cnt == 1) {
+					first = i + 1;
+				}
+				if (cnt == 2) {
+					second = i + 1;
+				}
+			}
+		}
+		if (line.substr(first, second - first - 1).compare(userName) == 0) {
+			invitationReplyList += line;
+			delete_line("InvitationReply.txt", countReply);
+		}
+		invitationReplyList += "#";
+		cnt = 0;
+	}
+	return invitationReplyList;
+	input_file.close();
+}
+
+string getRequestReply(string userName) {
+	string requestReplyList = "";
+	string filename("RequestReply.txt");
+	string line; int countReply = 0;
+	int first = 0, second = 0, cnt = 0, lineNum = 0;
+	ifstream input_file(filename);
+	if (!input_file.is_open()) {
+		cerr << "Could not open the file - '"
+			<< filename << "'" << endl;
+		return "Server can not access to DB. Try Again!";
+	}
+	while (getline(input_file, line)) {
+		countReply++;
+		for (int i = 0; i < line.length(); i++) {
+			if (line[i] == '|') {
+				cnt++;
+				if (cnt == 1) {
+					first = i + 1;
+				}
+				if (cnt == 2) {
+					second = i + 1;
+				}
+			}
+		}
+		if (line.substr(first, second - first - 1).compare(userName) == 0) {
+			requestReplyList += line;
+			delete_line("InvitationReply.txt", countReply);
+		}
+		requestReplyList += "#";
+		cnt = 0;
+	}
+	return requestReplyList;
+	input_file.close();
+}
+
 string getEventInforById(int n) {
 	string eventInfor = ""; int cnt = 9999;
 	string filename("Event.txt");
